@@ -87,9 +87,56 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: `Tim's first stab at being a journalist`,
+    date: `May 11th, 2022`,
+    firstParagraph: `I really don't have much to say...`,
+    secondParagraph: `...about anything really....`,
+    thirdParagraph: `Seriously, I'm really stumped here!`
   }
 ];
 
+
+function articleMaker({title, date, firstParagraph, secondParagraph, thirdParagraph}){
+  const articleDiv = document.createElement("div");
+  const header = document.createElement("h2");
+  const dateInfo = document.createElement("p");
+  const p1 = document.createElement("p");
+  const p2 = document.createElement("p");
+  const p3 = document.createElement("p");
+  const button = document.createElement("span");
+
+  articleDiv.appendChild(header);
+  articleDiv.appendChild(dateInfo);
+  articleDiv.appendChild(p1);
+  articleDiv.appendChild(p2);
+  articleDiv.appendChild(p3);
+  articleDiv.appendChild(button);
+
+  articleDiv.classList.add("article");
+  dateInfo.classList.add("date");
+  button.classList.add("expandButton");
+
+  header.textContent = title;
+  dateInfo.textContent = date;
+  p1.textContent = firstParagraph;
+  p2.textContent = secondParagraph;
+  p3.textContent = thirdParagraph;
+  button.textContent = "+";
+
+  button.addEventListener("click", () => {
+    articleDiv.classList.toggle("article-open");
+  })
+
+  return articleDiv;
+}
+
+const mainFeed = document.querySelector(".articles");
+data.forEach(each => {
+  const newArt = articleMaker(each);
+  mainFeed.appendChild(newArt);
+})
 /*
   Step 1: Write a component called 'articleMaker' to create an article.
   Your component is a function that takes an article object as its only argument,
